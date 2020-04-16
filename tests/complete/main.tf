@@ -1,0 +1,3 @@
+module "azds" {
+  source = "../../"
+}
