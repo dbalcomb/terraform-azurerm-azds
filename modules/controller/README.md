@@ -1,6 +1,9 @@
-# terraform-azurerm-azds
+# Controller
 
-Terraform modules for [Azure Dev Spaces][azds].
+This module configures an Azure Dev Space controller for an existing Azure
+Kubernetes Service cluster. The controller is responsible for setting up a
+custom ingress controller which routes traffic under a unique hostname per
+space.
 
 ## Usage
 
@@ -11,10 +14,10 @@ module "aks" {
   # ...
 }
 
-module "azds" {
-  source = "github.com/dbalcomb/terraform-azurerm-azds"
+module "azds_controller" {
+  source = "github.com/dbalcomb/terraform-azurerm-azds//modules/controller"
 
-  name    = "azds"
+  name    = "azds-controller"
   cluster = module.aks.cluster
 }
 ```
@@ -42,12 +45,6 @@ module "azds" {
 | `data_plane_fqdn` | `string` | The Azure Dev Space DataPlane DNS name             |
 | `host_suffix`     | `string` | The Azure Dev Space hostname suffix                |
 
-## Modules
-
-- [Controller](modules/controller/README.md)
-
 ## References
 
-- [Azure Dev Spaces](https://docs.microsoft.com/en-gb/azure/dev-spaces)
-
-[azds]: https://docs.microsoft.com/en-gb/azure/dev-spaces/about
+- [Installing Azure Dev Spaces](https://docs.microsoft.com/en-gb/azure/dev-spaces/how-to/install-dev-spaces)
